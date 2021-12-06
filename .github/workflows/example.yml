@@ -6,8 +6,16 @@ jobs:
     name: Checks
     steps:
       - uses: actions/checkout@v2
-      - run: yarn
+      - run: yarn --no-immutable
       - run: yarn lint --fix
       - run: yarn test --updateSnapshot
       - run: yarn prettier --write .
       - uses: dtinth/patch-generator-action@main
+      - run: |
+          # If filesize of /tmp/a is less than 1kb
+          if [ "$(wc -c < /tmp/a)" -lt 1024 ]; then
+            # Echo some text
+            echo "File was smaller than 1kb. Yielding a new file with additional text added."
+            # Write some text to /tmp/a
+            echo "Hello World" | tee /tmp/a
+          fi
