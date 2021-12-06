@@ -9,5 +9,5 @@ jobs:
       - run: yarn
       - run: yarn lint --fix
       - run: yarn test --updateSnapshot
-      - run: yarn prettier --write
+      - run: yarn prettier --write .
       - run: git diff --binary --exit-code
