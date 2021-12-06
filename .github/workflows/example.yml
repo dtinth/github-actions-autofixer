@@ -6,9 +6,13 @@ jobs:
     name: Checks
     steps:
       - uses: actions/checkout@v2
+      - run: yarn
+        if: always()
       - run: yarn --no-immutable
-      - run: yarn lint --fix
-      - run: yarn test --updateSnapshot
-      - run: yarn prettier --write .
-      - run: git add --update
-      - uses: dtinth/patch-generator-action@main
+        if: always()
+      - run: yarn lint
+        if: always()
+      - run: yarn test
+        if: always()
+      - run: yarn prettier --check .
+        if: always()
