@@ -6,6 +6,7 @@ jobs:
     name: Checks
     steps:
       - uses: actions/checkout@v2
+      - run: yarn
       - run: yarn lint --fix
       - run: yarn test --updateSnapshot
       - run: yarn prettier --write
